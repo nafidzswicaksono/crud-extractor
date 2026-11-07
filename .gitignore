@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.csv
+!data/*.csv
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+crud_matrix.csv
+detail.csv
+kolom.csv

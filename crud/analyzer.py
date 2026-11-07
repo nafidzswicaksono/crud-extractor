@@ -19,8 +19,10 @@ def analyze_statement(stmt) -> dict[str, set[str]]:
     elif isinstance(stmt, ast.Update):
         usage[stmt.table.name].add("U")
         for assignment in stmt.assignments:
-            _collect(assignment.value, usage, "U")
-        _collect(stmt.where, usage, "U")
+            # Nilai yang diambil dari tabel lain untuk di-assign sifatnya dibaca (Read)
+            _collect(assignment.value, usage, "R")
+        # Kondisi WHERE untuk mencari baris mana yang di-Update sifatnya dibaca (Read)
+        _collect(stmt.where, usage, "R")
     elif isinstance(stmt, ast.Delete):
         usage[stmt.table.name].add("D")
         _collect(stmt.where, usage, "R")
